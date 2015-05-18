@@ -187,7 +187,7 @@ mean(totalPerDay$steps)
 ```
 
 
-The impact of imputing the missing data, is that the max frequency of steps per days increased about 10 steps. 
+The impact of imputing the missing data, is that the max frequency of steps per days increased about 10 steps. And the mean and the median became equal. 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
