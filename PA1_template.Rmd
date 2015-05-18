@@ -86,10 +86,54 @@ nrow(data) - nrow(data[complete.cases(data), ])
 
 2 .Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
-We are going to fill it with the mean of intervals
 ```{r}
-
+names(avg) <- c("interval","avgSteps")
+tmp <- data
+tmp <- merge(data, avg, on =interval)
+tmp <- tmp %>%
+       mutate(steps = ifelse(is.na(steps), avgSteps, steps))
 ```
 
+3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
+```{r}
+newData <- dplyr::select(tmp, steps, date, interval)
+```
+
+4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+
+```{r}
+totalPerDay <- newData %>%
+               group_by(date) %>%
+               summarise(steps = sum(steps))
+hist(totalPerDay$steps, main = "Total Steps Taken Each Day", xlab = "Number Of Steps", ylab = "Frequency of Days")
+```
+
+The impact of imputing the missing data, is that the max frequency of steps per days increased about 10 steps. 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.
+
+1 . Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
+```{r}
+library(chron)
+factored <- data
+factored$daytype <-  ifelse(chron::is.weekend(factored$date), "weekend", "weekday")
+```
+
+2.Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
+
+```{r}
+library(lattice) 
+factored <- data
+factored$daytype <-  ifelse(chron::is.weekend(factored$date), "weekend", "weekday")
+avg <- tbl_df(factored[complete.cases(factored), ])
+avg <-  avg %>%
+     group_by(interval, daytype) %>%
+     summarise(steps = mean(steps))
+xyplot(steps~interval | daytype, data = avg,
+        type = 'l',
+        xlab = 'Interval',
+        ylab = 'Number of Steps',
+        layout = c(1,2))
+```
