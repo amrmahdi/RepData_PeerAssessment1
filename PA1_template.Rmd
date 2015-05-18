@@ -107,8 +107,18 @@ totalPerDay <- newData %>%
                summarise(steps = sum(steps))
 hist(totalPerDay$steps, main = "Total Steps Taken Each Day", xlab = "Number Of Steps", ylab = "Frequency of Days")
 ```
+  + Mean
+```{r}
+mean(totalPerDay$steps)
+```
 
-The impact of imputing the missing data, is that the max frequency of steps per days increased about 10 steps. 
+  + Median
+```{r}
+mean(totalPerDay$steps)
+```
+
+
+The impact of imputing the missing data, is that the max frequency of steps per days increased about 10 steps. And the and the median became equal. 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 

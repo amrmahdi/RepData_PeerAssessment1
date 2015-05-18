@@ -166,6 +166,26 @@ hist(totalPerDay$steps, main = "Total Steps Taken Each Day", xlab = "Number Of S
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-11-1.png) 
+  + Mean
+
+```r
+mean(totalPerDay$steps)
+```
+
+```
+## [1] 10766.19
+```
+
+  + Median
+
+```r
+mean(totalPerDay$steps)
+```
+
+```
+## [1] 10766.19
+```
+
 
 The impact of imputing the missing data, is that the max frequency of steps per days increased about 10 steps. 
 
@@ -199,4 +219,4 @@ xyplot(steps~interval | daytype, data = avg,
         layout = c(1,2))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-13-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-15-1.png) 
