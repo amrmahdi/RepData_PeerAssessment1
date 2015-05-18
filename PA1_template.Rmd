@@ -86,6 +86,8 @@ nrow(data) - nrow(data[complete.cases(data), ])
 
 2 .Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
+The strategy is to fill the missing values with the mean of the steps per interval.
+
 ```{r}
 names(avg) <- c("interval","avgSteps")
 tmp <- data

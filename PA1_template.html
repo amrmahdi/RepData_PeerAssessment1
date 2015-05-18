@@ -134,6 +134,7 @@ textxy(X = maxInterval$interval, Y = maxInterval$steps, labs=&quot;Maximum Numbe
 <pre class="r"><code>nrow(data) - nrow(data[complete.cases(data), ])</code></pre>
 <pre><code>## [1] 2304</code></pre>
 <p>2 .Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.</p>
+<p>The strategy is to fill the missing values with the mean of the steps per interval.</p>
 <pre class="r"><code>names(avg) &lt;- c(&quot;interval&quot;,&quot;avgSteps&quot;)
 tmp &lt;- data
 tmp &lt;- merge(data, avg, on =interval)
